@@ -1,5 +1,8 @@
 import eel
 
+# Eel を初期化
+eel.init('web')
+
 def main():
     eel.init('web')
     eel.start('index.html', size=(700, 700))
