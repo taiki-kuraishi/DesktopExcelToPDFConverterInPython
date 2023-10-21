@@ -3,15 +3,27 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DesktopExcelToPDFConverterInPython</title>
-    <script type="text/javascript" src="/eel.js"></script>
+    <title>Select File</title>
+    <!-- eel -->
+    <script src="/eel.js"></script>
 </head>
 
 <body>
-    <p>
-        こんばんは
-    </p>
+    <label for="file-selector">あああ</label>
+    <input type="file" id="file-selector">
+    <button onclick="sendFile()">Send File</button>
+    <script>
+        function sendFile() {
+            const fileSelector = document.getElementById('file-selector');
+            const file = fileSelector.files[0];
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const contents = event.target.result;
+                eel.receiveFile(file.name, contents);
+            };
+            reader.readAsArrayBuffer(file);
+        }
+    </script>
 </body>
 
 </html>
