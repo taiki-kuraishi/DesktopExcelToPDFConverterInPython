@@ -1,5 +1,5 @@
 import tkinter as ttk
-from tkinter import filedialog, messagebox
+from tkinter import filedialog, messagebox, StringVar
 from tkinter.constants import END
 
 
@@ -67,18 +67,47 @@ bottom_frame.columnconfigure(1, weight=1)
 bottom_frame.columnconfigure(2, weight=1)
 bottom_frame.columnconfigure(3, weight=1)
 
-#side frame
+# side frame
 side_frame = ttk.Frame(bottom_frame, bg='white', borderwidth=5, relief='ridge')
 side_frame.grid(row=0, column=0, sticky='nswe')
-ttk.Label(side_frame, text='side frame').pack()
-ttk.Label(side_frame, text='side frame').pack()
-ttk.Label(side_frame, text='side frame').pack()
-ttk.Label(side_frame, text='side frame').pack()
-ttk.Label(side_frame, text='side frame').pack()
+# listboxの作成
+listbox = ttk.Listbox(side_frame, height=5, width=15)
+# listbox.pack(fill='both', expand=True)
 
-#preview frame
-preview_frame = ttk.Frame(bottom_frame, bg='white', borderwidth=5, relief='ridge')
-preview_frame.grid(row=0, column=1, sticky='nswe',columnspan=3)
+# listboxにアイテムを追加する
+listbox.insert(END, "item1")
+listbox.insert(END, "item2")
+listbox.insert(END, "item3")
+listbox.insert(END, "item3")
+listbox.insert(END, "item3")
+listbox.insert(END, "item3")
+listbox.insert(END, "item3")
+listbox.insert(END, "item3")
+
+
+# スクロールバーの作成
+scrollbar = ttk.Scrollbar(
+    side_frame, orient=ttk.VERTICAL, command=listbox.yview)
+
+# スクロールバーをListboxに反映
+listbox["yscrollcommand"] = scrollbar.set
+
+# 各種ウィジェットの設置
+side_frame.rowconfigure(0, weight=1)
+side_frame.columnconfigure(0, weight=1)
+listbox.grid(row=0, column=0, sticky=(ttk.N, ttk.S, ttk.E, ttk.W))
+scrollbar.grid(row=0, column=1, sticky=(ttk.N, ttk.S))
+
+# ttk.Label(side_frame, text='side frame').pack()
+# ttk.Label(side_frame, text='side frame').pack()
+# ttk.Label(side_frame, text='side frame').pack()
+# ttk.Label(side_frame, text='side frame').pack()
+# ttk.Label(side_frame, text='side frame').pack()
+
+# preview frame
+preview_frame = ttk.Frame(bottom_frame, bg='white',
+                          borderwidth=5, relief='ridge')
+preview_frame.grid(row=0, column=1, sticky='nswe', columnspan=3)
 
 
 root.mainloop()
