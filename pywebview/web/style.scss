@@ -9,12 +9,29 @@ body {
     width: 100%;
     height: auto;
 
-    header{
+    header {
         background-color: gray;
+
         input {
             width: 50%;
             height: auto;
         }
-        
     }
+
+    article {
+        display: flex;
+        width: 100%;
+        height: 100vh;
+
+        aside {
+            width: 200px;
+            background-color: red;
+        }
+
+        main {
+            flex: 1;
+            background-color: beige;
+        }
+    }
+
 }

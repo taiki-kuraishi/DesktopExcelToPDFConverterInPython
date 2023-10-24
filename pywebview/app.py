@@ -44,4 +44,4 @@ class Api:
 api = Api()
 window = webview.create_window(
     "JS to Python", url="./web/index.html", js_api=api)
-webview.start(debug=True)
+webview.start(http_server=True,debug=True)

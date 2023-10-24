@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <script src="./index.js"></script>
+    <!-- <script src="https://deno.land/x/embed_pdf@v1.2.0/mod.js" type="module"></script> -->
     <title>Desktop App</title>
 </head>
 
@@ -19,8 +20,22 @@
         <br>
         <button onclick="onClickSubmit()">Submit</button>
     </header>
-    <main>
-    </main>
+    <article>
+        <aside>
+            <ul id="file_list">
+                <li>file 1</li>
+                <li>file 2</li>
+                <li>file 3</li>
+            </ul>
+        </aside>
+        <main>
+            <!-- <embed-pdf src="./img/test.pdf"></embed-pdf> -->
+            <!-- <iframe src="./img/test.pdf" frameborder="0"></iframe> -->
+            <embed src="./img/test.pdf" type="application/pdf" width="100%" height="100%">
+        </main>
+    </article>
+    <footer>
+    </footer>
 </body>
 
 </html>
