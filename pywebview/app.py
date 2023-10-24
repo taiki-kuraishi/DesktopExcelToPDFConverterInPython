@@ -2,19 +2,19 @@ import webview
 
 
 class Api:
-    def add(self, a, b):
-        print("Python")
-        return a+b
-
     def printPath(self, path):
         print(path)
 
     def choseFile(self):
         global window
+        # Folder dialog
+        # result = window.create_file_dialog(
+        #     webview.FOLDER_DIALOG, allow_multiple=True)
+        # File dialog
         result = window.create_file_dialog(
             webview.OPEN_DIALOG, allow_multiple=True)
         print(result)
-        return True
+        return result
 
 
 api = Api()

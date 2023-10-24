@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./index.js"></script>
     <title>Desktop App</title>
 </head>
 
@@ -18,29 +20,7 @@
         <button onclick="onClickSubmit()">決定</button>
     </header>
     <main>
-        <button onclick="onClickOk()">OK</button>
     </main>
-
-    <script>
-        async function onClickOk() {
-            let res = await pywebview.api.add(10, 15);
-            console.log(res);
-        }
-        async function onClickSubmit() {
-            const path = document.getElementById('text_input').value;
-            await pywebview.api.printPath(path);
-        }
-        async function onClickChoseFile() {
-            let res = await pywebview.api.choseFile();
-            console.log(res);
-            document.getElementById('text_input').value = res;
-        }
-
-        // input type=fileのの値が変更された時にinput type=textの値を変更する
-        // function onFileSelected() {
-        //         document.getElementById('text_input').value = document.getElementById('file_input').value;
-        // }
-    </script>
 </body>
 
 </html>
