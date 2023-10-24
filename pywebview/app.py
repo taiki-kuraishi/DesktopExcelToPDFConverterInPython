@@ -1,10 +1,24 @@
 import webview
+import os
+import openpyxl
+
+# ファイルが存在するか確認
+def isValidFilePath(path):
+    return os.path.isfile(path)
+
+#Excelファイルを開く
+def openExcel(path):
+    # open file
+    wb = openpyxl.load_workbook(path)
+    ws = wb.active
+    cell = ws['A1']
+
+    # シートを閉じる
+    wb.close()
+    return cell.value
 
 
 class Api:
-    def printPath(self, path):
-        print(path)
-
     def choseFile(self):
         global window
         # Folder dialog
@@ -15,6 +29,16 @@ class Api:
             webview.OPEN_DIALOG, allow_multiple=True)
         print(result)
         return result
+
+    def convertToPDF(self, path):
+        # ファイルが存在するか確認
+        if not isValidFilePath(path):
+            return 1
+
+        # open file
+        cell = openExcel(path)
+        print(cell)
+        return 0
 
 
 api = Api()
