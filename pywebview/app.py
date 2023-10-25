@@ -26,6 +26,12 @@ def openExcel(path):
 
     App.quit() #アプリ実行環境を終了
 
+def on_closing():
+    print("on_closing")
+    #imgの中のpdfを全て削除
+
+def on_closed():
+    print("on_closed")
 
 class Api:
     def choseFile(self):
@@ -67,4 +73,6 @@ class Api:
 api = Api()
 window = webview.create_window(
     "JS to Python", url="./web/index.html", js_api=api)
+window.events.closed += on_closed
+window.events.closing += on_closing
 webview.start(http_server=True,debug=True)
