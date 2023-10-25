@@ -1,21 +1,30 @@
-import webview
-import os
-import openpyxl
+import webview,os
+import xlwings as xw
 
 # ファイルが存在するか確認
-def isValidFilePath(path):
-    return os.path.isfile(path)
+#fileの場合0, folderの場合1, 存在しない場合2
+def isValidPath(path):
+    if os.path.isfile(path):
+        return 0
+    elif os.path.isdir(path):
+        return 1
+    else:
+        return 2
 
 #Excelファイルを開く
 def openExcel(path):
-    # open file
-    wb = openpyxl.load_workbook(path)
-    ws = wb.active
-    cell = ws['A1']
+    excel_file_name = path.split('/')[-1]
+    savefile_path = "pywebview/web/img" #出力先のパスを設定
 
-    # シートを閉じる
+    App = xw.App() #単一のアプリ実行環境管理
+
+    #ExcelファイルをPDFファイルに変換
+    pdf_file_name = excel_file_name.replace(".xlsx", ".pdf")
+    wb = xw.Book(path)
+    wb.to_pdf(path= savefile_path + '/' + pdf_file_name, include=None, exclude=None, exclude_start_string='#', show=False)
     wb.close()
-    return cell.value
+
+    App.quit() #アプリ実行環境を終了
 
 
 class Api:
@@ -27,17 +36,31 @@ class Api:
         # File dialog
         result = window.create_file_dialog(
             webview.OPEN_DIALOG, allow_multiple=True)
+        print(type(result))
         print(result)
         return result
 
-    def convertToPDF(self, path):
-        # ファイルが存在するか確認
-        if not isValidFilePath(path):
-            return 1
+    #excelファイルをPDFに変換する
+    #file not found 1, folder not found 2, success 0
+    def main(self, paths):
+        status = 0
+        print(paths)
 
-        # open file
-        cell = openExcel(path)
-        print(cell)
+        # pathが複数か単数かで処理を分ける
+        if ',' in paths:
+            path_list = paths.split(',')
+        else:
+            #pathがfileかfolderか存在するか確認
+            status = isValidPath(paths)
+            #fileの場合
+            if status == 0:
+                openExcel(paths)
+            # #folderの場合
+            # elif status == 1:
+            # #存在しない場合
+            # elif status == 2:
+            #     return 1
+
         return 0
 
 

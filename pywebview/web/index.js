@@ -1,6 +1,6 @@
 async function onClickSubmit() {
-    const path = document.getElementById('text_input').value;
-    const status = await pywebview.api.convertToPDF(path);
+    const paths = document.getElementById('text_input').value;
+    const status = await pywebview.api.main(paths);
     if (status == 0) {
         // do nothing
     }
@@ -13,6 +13,8 @@ async function onClickSubmit() {
 }
 async function onClickChoseFile() {
     let res = await pywebview.api.choseFile();
-    console.log(res);
+    // console.log(typeof res)
+    // console.log(res[0]);
+    // console.log(res.length)
     document.getElementById('text_input').value = res;
 }
