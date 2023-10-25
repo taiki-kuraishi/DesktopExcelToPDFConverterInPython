@@ -46,6 +46,7 @@ def get_excel_files(folder_path):  # folder内のexcelファイルのpathを取�
 def on_closing():  # windowを閉じている最中に呼ばれる
     print("on_closing")
 
+
 def on_closed():  # windowが閉じた時に呼ばれる
     # imgの中のpdfを全て削除
     for file in os.listdir(TMP_FOLDER_PATH):
@@ -98,7 +99,7 @@ class Api:  # Jsから呼ばれる関数を定義
 
 api = Api()
 window = webview.create_window(
-    "JS to Python", url="./web/index.html", js_api=api)
+    "DesktopExcelToPDFConverterInPython", url="./web/index.html", js_api=api)
 window.events.closed += on_closed
 window.events.closing += on_closing
 webview.start(http_server=True, debug=True)
