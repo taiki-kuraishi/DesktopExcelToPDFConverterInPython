@@ -35,12 +35,12 @@ def convert_excel_to_pdf(path):  # excelファイルからpdfファイルを作�
     App.quit()  # アプリ実行環境を終了
 
 
-def get_excel_files(folder_path):  # folder内のexcelファイルのpathを取得
-    excel_files = []
+def get_file_path(folder_path, extension):  # folder内のexcelファイルのpathを取得
+    file_paths = []
     for file in os.listdir(folder_path):
-        if file.endswith(".xlsx"):
-            excel_files.append(os.path.join(folder_path, file))
-    return excel_files
+        if file.endswith(extension):
+            file_paths.append(os.path.join(folder_path, file))
+    return file_paths
 
 
 def on_closing():  # windowを閉じている最中に呼ばれる
@@ -49,9 +49,10 @@ def on_closing():  # windowを閉じている最中に呼ばれる
 
 def on_closed():  # windowが閉じた時に呼ばれる
     # imgの中のpdfを全て削除
-    for file in os.listdir(TMP_FOLDER_PATH):
-        if file.endswith(".pdf"):
-            os.remove(os.path.join(TMP_FOLDER_PATH, file))
+    path_list = get_file_path(TMP_FOLDER_PATH, '.pdf')
+    for path in path_list:
+        os.remove(path)
+        print("remove: " + path)
     print("on_closed")
 
 
@@ -73,6 +74,24 @@ class Api:  # Jsから呼ばれる関数を定義
         """
         global window
         result = window.create_file_dialog(webview.FOLDER_DIALOG)
+        return result
+
+    def saveDialog(self):  # saveダイアログを表示
+        """
+        return
+        filepathをタプルで返す
+        """
+        global window
+        # ./imgの中のpdfのpathを取得
+        path_list = get_file_path(TMP_FOLDER_PATH, '.pdf')
+        if len(path_list) == 0:
+            print("pdf file not found")
+            return None
+        # path_listを一つの文字列に変換
+        save_filename = ','.join(path_list)
+
+        result = window.create_file_dialog(webview.FOLDER_DIALOG, file_types=(
+            'PDF Files (*.pdf)',), save_filename='output.pdf')
         return result
 
     # 入力されたpathを受け取り、excelのpathのリストを返す
@@ -101,13 +120,30 @@ class Api:  # Jsから呼ばれる関数を定義
                 # convert_excel_to_pdf(paths)
                 path_list.append(paths)
             elif status == 1:  # folderの場合
-                path_list = get_excel_files(paths)
+                path_list = get_file_path(paths, '.xlsx')
                 # for excel_path in path_list:
                 #     convert_excel_to_pdf(excel_path)
             elif status == 2:  # 存在しない場合
                 return [1]
 
         return path_list
+
+    def saveFile(self, folder_path):
+        # pathがfolderとして存在するか確認
+        status = is_valid_path(folder_path)
+        if status != 1:
+            return 1
+        # /tmpの中のpdfのpathを取得
+        path_list = get_file_path(TMP_FOLDER_PATH, '.pdf')
+        if len(path_list) == 0:
+            print("pdf file not found")
+            return 2
+        # /tmpの中のpdfをfolder_pathに移動
+        for path in path_list:
+            os.rename(path, folder_path + '/' + path.split('/')[-1])
+            print("move: " + path)
+
+        return 0
 
 
 api = Api()

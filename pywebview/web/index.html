@@ -15,7 +15,7 @@
     <header>
         <label for="file_input">chose file dir</label>
         <br>
-        <input type="text" id="text_input" placeholder="your path">
+        <input type="text" id="path_input" placeholder="your path">
         <button onclick="onClickChoseFile()">chose file</button>
         <button onclick="onClickChoseFolder()">chose folder</button>
         <br>
@@ -28,6 +28,13 @@
 
         </ul>
     </main>
+    <footer>
+        <p>save folder</p>
+        <input type="text" id="path_output" placeholder="保存先" readonly>
+        <button onclick="onClickChoseSaveFolder()">chose save folder</button>
+        <br>
+        <button onclick="onClickSave()">save</button>
+    </footer>
 </body>
 
 </html>

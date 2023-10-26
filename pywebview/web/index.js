@@ -1,7 +1,7 @@
 let path_array = [];
 
 async function onClickSubmit() {
-    const paths = document.getElementById('text_input').value;
+    const paths = document.getElementById('path_input').value;
     const path_array = await pywebview.api.submitPath(paths);
     console.log(path_array)
     if (path_array[0] == 1) {
@@ -24,9 +24,30 @@ async function onClickSubmit() {
 }
 async function onClickChoseFile() {
     let res = await pywebview.api.showFileDialog();
-    document.getElementById('text_input').value = res;
+    document.getElementById('path_input').value = res;
 }
 async function onClickChoseFolder() {
     let res = await pywebview.api.showFolderDialog();
-    document.getElementById('text_input').value = res;
+    document.getElementById('path_input').value = res;
+}
+
+async function onClickChoseSaveFolder() {
+    let res = await pywebview.api.showFolderDialog();
+    document.getElementById('path_output').value = res;
+}
+
+async function onClickSave() {
+    const path = document.getElementById('path_output').value;
+    console.log(path);
+    let res = await pywebview.api.saveFile(path);
+    console.log(res);
+    if (res == 1) {
+        alert("Folder not found");
+    }
+    else if (res == 2) {
+        alert("PDF File not found");
+    }
+    else {
+        alert("Save success");
+    }
 }
