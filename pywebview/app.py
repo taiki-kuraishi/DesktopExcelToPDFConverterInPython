@@ -56,7 +56,7 @@ def on_closed():  # windowが閉じた時に呼ばれる
 
 
 class Api:  # Jsから呼ばれる関数を定義
-    def choseFile(self):  # fileダイアログを表示
+    def showFileDialog(self):  # fileダイアログを表示
         """
         return
         filepathをタプルで返す
@@ -66,7 +66,7 @@ class Api:  # Jsから呼ばれる関数を定義
             webview.OPEN_DIALOG, allow_multiple=True,file_types=('Excel Files (*.xlsx)',))
         return result
 
-    def choseFolder(self):  # folderダイアログを表示
+    def showFolderDialog(self):  # folderダイアログを表示
         """
         return
         filepathをタプルで返す
@@ -77,9 +77,10 @@ class Api:  # Jsから呼ばれる関数を定義
 
     # excelファイルをPDFに変換する
     # file not found 1, success 0
-    def main(self, paths):
+    def submitPath(self, paths):
         status = 0
         path_list = []
+        # num_files = 0 #pathに含まれるfileの数
         print(paths)
 
         # pathが複数か単数かで処理を分ける
