@@ -62,14 +62,17 @@ class Api:  # Jsから呼ばれる関数を定義
         filepathをタプルで返す
         """
         global window
-        # Folder dialog
-        # result = window.create_file_dialog(
-        #     webview.FOLDER_DIALOG, allow_multiple=True)
-        # File dialog
         result = window.create_file_dialog(
-            webview.OPEN_DIALOG, allow_multiple=True)
-        print(type(result))
-        print(result)
+            webview.OPEN_DIALOG, allow_multiple=True,file_types=('Excel Files (*.xlsx)',))
+        return result
+
+    def choseFolder(self):  # folderダイアログを表示
+        """
+        return
+        filepathをタプルで返す
+        """
+        global window
+        result = window.create_file_dialog(webview.FOLDER_DIALOG)
         return result
 
     # excelファイルをPDFに変換する

@@ -8,7 +8,7 @@
     <script src="./index.js"></script>
     <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> -->
     <!-- <script src="https://deno.land/x/embed_pdf@v1.2.0/mod.js" type="module"></script> -->
-    <title>Desktop App</title>
+    <title>DesktopExcelToPDFConverterInPython</title>
 </head>
 
 <body>
@@ -16,29 +16,11 @@
         <label for="file_input">chose file dir</label>
         <br>
         <input type="text" id="text_input" placeholder="your path">
-        <!-- <input type="file" id="file_input" onchange="onFileSelected()"> -->
         <button onclick="onClickChoseFile()">chose file</button>
+        <button onclick="onClickChoseFolder()">chose folder</button>
         <br>
         <button onclick="onClickSubmit()">Submit</button>
     </header>
-    <article>
-        <aside>
-            <ul id="file_list">
-                <li>file 1</li>
-                <li>file 2</li>
-                <li>file 3</li>
-            </ul>
-        </aside>
-        <main>
-            <!-- <embed-pdf src="./img/test.pdf"></embed-pdf> -->
-            <!-- <iframe src="./img/test.pdf" frameborder="0"></iframe> -->
-            <!-- <embed src="./img/test.pdf" type="application/pdf" width="100%" height="100%" zoom="50%"> -->
-            <object data="./img/test.pdf" type="application/pdf" height="100%" width="100%">
-            </object>
-        </main>
-    </article>
-    <footer>
-    </footer>
 </body>
 
 </html>

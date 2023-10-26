@@ -13,8 +13,9 @@ async function onClickSubmit() {
 }
 async function onClickChoseFile() {
     let res = await pywebview.api.choseFile();
-    // console.log(typeof res)
-    // console.log(res[0]);
-    // console.log(res.length)
+    document.getElementById('text_input').value = res;
+}
+async function onClickChoseFolder() {
+    let res = await pywebview.api.choseFolder();
     document.getElementById('text_input').value = res;
 }
