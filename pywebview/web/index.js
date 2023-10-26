@@ -1,14 +1,14 @@
+let path_array = [];
+
 async function onClickSubmit() {
     const paths = document.getElementById('text_input').value;
-    const status = await pywebview.api.submitPath(paths);
-    if (status == 0) {
-        // do nothing
-    }
-    else if(status == 1) {
+    const path_array = await pywebview.api.submitPath(paths);
+    console.log(path_array)
+    if (path_array[0] == 1) {
         alert("File not found");
     }
-    else{
-        alert("Error");
+    else {
+        console.log(path_array);
     }
 }
 async function onClickChoseFile() {

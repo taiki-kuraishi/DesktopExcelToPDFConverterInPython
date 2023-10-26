@@ -63,7 +63,7 @@ class Api:  # Jsから呼ばれる関数を定義
         """
         global window
         result = window.create_file_dialog(
-            webview.OPEN_DIALOG, allow_multiple=True,file_types=('Excel Files (*.xlsx)',))
+            webview.OPEN_DIALOG, allow_multiple=True, file_types=('Excel Files (*.xlsx)',))
         return result
 
     def showFolderDialog(self):  # folderダイアログを表示
@@ -75,7 +75,7 @@ class Api:  # Jsから呼ばれる関数を定義
         result = window.create_file_dialog(webview.FOLDER_DIALOG)
         return result
 
-    # excelファイルをPDFに変換する
+    # 入力されたpathを受け取り、excelのpathのリストを返す
     # file not found 1, success 0
     def submitPath(self, paths):
         status = 0
@@ -90,23 +90,24 @@ class Api:  # Jsから呼ばれる関数を定義
             for path in path_list:
                 status = is_valid_path(path)
                 if status != 0:
-                    return 1
-            # 全てのpathを変換する
-            for path in path_list:
-                convert_excel_to_pdf(path)
+                    return [1]
+            # # 全てのpathを変換する
+            # for path in path_list:
+            #     convert_excel_to_pdf(path)
         else:
             # pathがfileかfolderか存在するか確認
             status = is_valid_path(paths)
             if status == 0:  # fileの場合
-                convert_excel_to_pdf(paths)
+                # convert_excel_to_pdf(paths)
+                path_list.append(paths)
             elif status == 1:  # folderの場合
                 path_list = get_excel_files(paths)
-                for excel_path in path_list:
-                    convert_excel_to_pdf(excel_path)
+                # for excel_path in path_list:
+                #     convert_excel_to_pdf(excel_path)
             elif status == 2:  # 存在しない場合
-                return 1
+                return [1]
 
-        return 0
+        return path_list
 
 
 api = Api()
