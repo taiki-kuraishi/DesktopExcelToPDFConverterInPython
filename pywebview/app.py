@@ -73,7 +73,7 @@ class Api:  # Jsから呼ばれる関数を定義
         return result
 
     # excelファイルをPDFに変換する
-    # file not found 1, folder not found 2, success 0
+    # file not found 1, success 0
     def main(self, paths):
         status = 0
         path_list = []
@@ -82,6 +82,14 @@ class Api:  # Jsから呼ばれる関数を定義
         # pathが複数か単数かで処理を分ける
         if ',' in paths:
             path_list = paths.split(',')
+            # 全てのpathがfileであることを確認する
+            for path in path_list:
+                status = is_valid_path(path)
+                if status != 0:
+                    return 1
+            # 全てのpathを変換する
+            for path in path_list:
+                convert_excel_to_pdf(path)
         else:
             # pathがfileかfolderか存在するか確認
             status = is_valid_path(paths)
