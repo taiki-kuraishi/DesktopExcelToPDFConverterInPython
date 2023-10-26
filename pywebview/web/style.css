@@ -10,7 +10,6 @@ body {
 }
 body header {
   background-color: gray;
-  height: 100vh;
 }
 body header input {
   width: 50%;
