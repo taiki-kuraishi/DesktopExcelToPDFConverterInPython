@@ -1,6 +1,8 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld :msg="msg" />
+  </div>
 </template>
 
 <script>
@@ -8,8 +10,14 @@ import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
+  data: () => ({
+    msg: 'Welcome to Your Vue.js App',
+  }),
   components: {
     HelloWorld
+  },
+  mounted() {
+    console.log('App mounted!')
   }
 }
 </script>
