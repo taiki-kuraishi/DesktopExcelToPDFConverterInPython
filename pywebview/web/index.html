@@ -5,14 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./bootstrap-5.3.0-dist/css/bootstrap.min.css">
     <script src="./index.js"></script>
+    <script src="./bootstrap-5.3.0-dist/js/bootstrap.min.js"></script>
     <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> -->
     <!-- <script src="https://deno.land/x/embed_pdf@v1.2.0/mod.js" type="module"></script> -->
     <title>DesktopExcelToPDFConverterInPython</title>
 </head>
 
 <body>
-    <header>
+    <div id="start-menu">
+        <p>this is start-menu</p>
+        <button id="start-menu-next" onclick="onClickShowOnlySelectPathMenu()">next</button>
+    </div>
+    <div id="select-path">
         <label for="file_input">chose file dir</label>
         <br>
         <input type="text" id="path_input" placeholder="your path">
@@ -20,21 +26,29 @@
         <button onclick="onClickChoseFolder()">chose folder</button>
         <br>
         <button onclick="onClickSubmit()">Submit</button>
-    </header>
-    <main>
+
+        <button id="select-path-back" onclick="onClickShowOnlyStartMenu()">back</button>
+        <button id="select-path-next" onclick="onClickShowOnlyShowPathListMenu()">next</button>
+    </div>
+    <div id="show-path-list">
         <p>path list</p>
         <p id="path_length"></p>
         <ul id="file_list">
-
         </ul>
-    </main>
-    <footer>
+
+        <button id="show-path-list-back" onclick="onClickShowOnlySelectPathMenu()">back</button>
+        <button id="show-path-list-next" onclick="onClickShowOnlySaveFileMenu()">next</button>
+    </div>
+    <div id="save-file">
         <p>save folder</p>
         <input type="text" id="path_output" placeholder="保存先" readonly>
         <button onclick="onClickChoseSaveFolder()">chose save folder</button>
         <br>
         <button onclick="onClickSave()">save</button>
-    </footer>
+
+        <button id="save-file-back" onclick="onClickShowOnlyShowPathListMenu()">back</button>
+        <!-- <button id="save-file-next" onclick="onClickNext()">next</button> -->
+    </div>
 </body>
 
 </html>

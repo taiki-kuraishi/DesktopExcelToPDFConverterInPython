@@ -1,5 +1,43 @@
 let path_array = [];
 
+//windowが読み込まれたら
+//start-menuのみ表示
+window.addEventListener('DOMContentLoaded', () => {
+    onClickShowOnlyStartMenu();
+});
+
+//start-menuのみ表示
+function onClickShowOnlyStartMenu() {
+    document.getElementById('start-menu').style.display = 'block';
+    document.getElementById('select-path').style.display = 'none';
+    document.getElementById('show-path-list').style.display = 'none';
+    document.getElementById('save-file').style.display = 'none';
+}
+
+//select-pathのみ表示
+function onClickShowOnlySelectPathMenu() {
+    document.getElementById('start-menu').style.display = 'none';
+    document.getElementById('select-path').style.display = 'block';
+    document.getElementById('show-path-list').style.display = 'none';
+    document.getElementById('save-file').style.display = 'none';
+}
+
+//show-path-listのみ表示
+function onClickShowOnlyShowPathListMenu() {
+    document.getElementById('start-menu').style.display = 'none';
+    document.getElementById('select-path').style.display = 'none';
+    document.getElementById('show-path-list').style.display = 'block';
+    document.getElementById('save-file').style.display = 'none';
+}
+
+//save-fileのみ表示
+function onClickShowOnlySaveFileMenu() {
+    document.getElementById('start-menu').style.display = 'none';
+    document.getElementById('select-path').style.display = 'none';
+    document.getElementById('show-path-list').style.display = 'none';
+    document.getElementById('save-file').style.display = 'block';
+}
+
 async function onClickSubmit() {
     const paths = document.getElementById('path_input').value;
     const path_array = await pywebview.api.submitPath(paths);
