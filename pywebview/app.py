@@ -47,11 +47,6 @@ def on_closing():  # windowを閉じている最中に呼ばれる
 
 
 def on_closed():  # windowが閉じた時に呼ばれる
-    # imgの中のpdfを全て削除
-    path_list = get_file_path(TMP_FOLDER_PATH, '.pdf')
-    for path in path_list:
-        os.remove(path)
-        print("remove: " + path)
     print("on_closed")
 
 
@@ -74,24 +69,6 @@ class Api:  # Jsから呼ばれる関数を定義
         global window
         result = window.create_file_dialog(webview.FOLDER_DIALOG)
         return result
-
-    # def saveDialog(self):  # saveダイアログを表示
-    #     """
-    #     return
-    #     filepathをタプルで返す
-    #     """
-    #     global window
-    #     # ./imgの中のpdfのpathを取得
-    #     path_list = get_file_path(TMP_FOLDER_PATH, '.pdf')
-    #     if len(path_list) == 0:
-    #         print("pdf file not found")
-    #         return None
-    #     # path_listを一つの文字列に変換
-    #     save_filename = ','.join(path_list)
-
-    #     result = window.create_file_dialog(webview.FOLDER_DIALOG, file_types=(
-    #         'PDF Files (*.pdf)',), save_filename='output.pdf')
-    #     return result
 
     # 入力されたpathを受け取り、excelのpathのリストを返す
     # file not found 1, success pathのリスト
@@ -134,20 +111,10 @@ class Api:  # Jsから呼ばれる関数を定義
         status = is_valid_path(folder_path)
         if status != 1:
             return 1
-        # # /tmpの中のpdfのpathを取得
-        # path_list = get_file_path(TMP_FOLDER_PATH, '.pdf')
-        # if len(path_list) == 0:
-        #     print("pdf file not found")
-        #     return 2
-        # # /tmpの中のpdfをfolder_pathに移動
-        # for path in path_list:
-        #     os.rename(path, folder_path + '/' + path.split('/')[-1])
-        #     print("move: " + path)
-
         return 0
-    # 入力されたpathを受け取り、pdfに変換する
-    # file not found 1, pdf already exists 2, success 0
 
+    # 入力されたpathを受け取り、pathが正しいか、保存先にすでに同名のpdfが存在するか確認する
+    # file not found 1, pdf already exists 2, success 0
     def checkPath(self, excel_path, destination_folder_path):
         # pathがfileかfolderか存在するか確認
         status = is_valid_path(excel_path)
@@ -160,6 +127,8 @@ class Api:  # Jsから呼ばれる関数を定義
             return 2
         return 0
 
+    # 入力されたpathを受け取り、pdfに変換する
+    # file not found 1, pdf already exists 2, success 0
     def convert(self, excel_path, destination_folder_path):
         # 変換
         try:
