@@ -6,15 +6,100 @@ body {
     font-size: 14px;
     color: #000;
 
-    width: 100%;
-    height: auto;
+    .menu {
+        width: 100%;
+        height: 100%;
+        text-align: center;
 
-    header {
-        background-color: gray;
+        .header {
+            width: 100%;
+            height: 20vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
 
-        input {
-            width: 50%;
+        #progress {
+            width: 60%;
             height: auto;
+        }
+
+        .main {
+            width: 100%;
+            height: 60vh;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            #two-button {
+                width: 100%;
+                height: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+
+                button {
+                    width: 25%;
+                    height: auto;
+                    margin: 10px;
+                }
+            }
+
+            #convert-before {
+                width: 100%;
+                height: auto;
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            #convert-after {
+                width: 100%;
+                height: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            input {
+                width: 55%;
+                height: auto;
+            }
+
+            button {
+                width: 25%;
+                height: auto;
+            }
+
+            ol {
+                width: 60%;
+                height: 50vh;
+                overflow-y: scroll;
+
+                li {
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        }
+
+        .footer-button {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+
+            button {
+                width: 25%;
+                height: 25%;
+                margin: 10px;
+            }
         }
     }
 }

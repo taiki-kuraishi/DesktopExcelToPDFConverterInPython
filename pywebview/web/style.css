@@ -5,13 +5,87 @@ body {
   font-family: sans-serif;
   font-size: 14px;
   color: #000;
+}
+body .menu {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+body .menu .header {
+  width: 100%;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+body .menu #progress {
+  width: 60%;
+  height: auto;
+}
+body .menu .main {
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+body .menu .main #two-button {
   width: 100%;
   height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-body header {
-  background-color: gray;
-}
-body header input {
-  width: 50%;
+body .menu .main #two-button button {
+  width: 25%;
   height: auto;
+  margin: 10px;
+}
+body .menu .main #convert-before {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+body .menu .main #convert-after {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+body .menu .main input {
+  width: 55%;
+  height: auto;
+}
+body .menu .main button {
+  width: 25%;
+  height: auto;
+}
+body .menu .main ol {
+  width: 60%;
+  height: 50vh;
+  overflow-y: scroll;
+}
+body .menu .main ol li {
+  width: 100%;
+  text-align: left;
+}
+body .menu .footer-button {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+body .menu .footer-button button {
+  width: 25%;
+  height: 25%;
+  margin: 10px;
 }/*# sourceMappingURL=style.css.map */
