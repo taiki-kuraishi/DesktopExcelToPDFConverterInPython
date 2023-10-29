@@ -13,20 +13,27 @@
 
 <body>
     <div id="start-menu" class="menu">
-        <div class="main">
+        <div class="header">
             <p>this is start-menu</p>
+        </div>
+        <div class="main">
         </div>
         <div class="footer-button">
             <button id="start-menu-next" onclick="onClickShowOnlySelectPathMenu()" class="btn btn-primary">next</button>
         </div>
     </div>
     <div id="select-path" class="menu">
+        <div class="header">
+            <p>select path</p>
+        </div>
         <div class="main">
             <label for="file_input">chose file dir</label>
             <br>
             <input type="text" id="path_input" placeholder="your path">
-            <button onclick="onClickChoseFile()">chose file</button>
-            <button onclick="onClickChoseFolder()">chose folder</button>
+            <div id="two-button">
+                <button class="btn btn-success" onclick="onClickChoseFile()">chose file</button>
+                <button class="btn btn-warning" onclick="onClickChoseFolder()">chose folder</button>
+            </div>
             <br>
             <button onclick="onClickSubmit()">Submit</button>
         </div>
@@ -38,6 +45,9 @@
         </div>
     </div>
     <div id="show-path-list" class="menu">
+        <div class="header">
+            <p>show path list</p>
+        </div>
         <div class="main">
             <p>path list</p>
             <p id="path_length"></p>
@@ -52,6 +62,9 @@
         </div>
     </div>
     <div id="save-file" class="menu">
+        <div class="header">
+            <p>save file</p>
+        </div>
         <div class="main">
             <p>save folder</p>
             <input type="text" id="path_output" placeholder="保存先" readonly>
