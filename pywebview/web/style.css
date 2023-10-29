@@ -48,6 +48,15 @@ body .menu .main button {
   width: 25%;
   height: auto;
 }
+body .menu .main ol {
+  width: 60%;
+  height: 50vh;
+  overflow-y: scroll;
+}
+body .menu .main ol li {
+  width: 100%;
+  text-align: left;
+}
 body .menu .footer-button {
   width: 100%;
   height: auto;

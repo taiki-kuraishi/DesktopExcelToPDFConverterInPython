@@ -28,7 +28,7 @@ body {
             align-items: center;
             text-align: center;
 
-            #two-button{
+            #two-button {
                 width: 100%;
                 height: auto;
                 display: flex;
@@ -51,6 +51,17 @@ body {
             button {
                 width: 25%;
                 height: auto;
+            }
+
+            ol {
+                width: 60%;
+                height: 50vh;
+                overflow-y: scroll;
+
+                li {
+                    width: 100%;
+                    text-align: left;
+                }
             }
         }
 
