@@ -29,7 +29,8 @@
         <div class="main">
             <label for="file_input">chose file dir</label>
             <br>
-            <input type="text" id="path_input" placeholder="your path" onchange="onChangePathInput()">
+            <input type="text" id="path-input" placeholder="your path"
+                onchange="onChangeInput('path-input' , 'select-path-next')">
             <div id="two-button">
                 <button class="btn btn-success" onclick="onClickChoseFile()">chose file</button>
                 <button class="btn btn-warning" onclick="onClickChoseFolder()">chose folder</button>
@@ -38,8 +39,7 @@
 
         <div class="footer-button">
             <button id="select-path-back" onclick="onClickShowOnlyStartMenu()" class="btn btn-secondary">back</button>
-            <button id="select-path-next" onclick="onClickPathSubmit()"
-                class="btn btn-primary">next</button>
+            <button id="select-path-next" onclick="onClickPathSubmit()" class="btn btn-primary">next</button>
         </div>
     </div>
     <div id="show-path-list" class="menu">
@@ -71,15 +71,26 @@
         </div>
         <div class="main">
             <p>save folder</p>
-            <input type="text" id="path_output" placeholder="保存先" readonly>
-            <button onclick="onClickChoseSaveFolder()">chose save folder</button>
-            <br>
-            <button onclick="onClickSave()">save</button>
+            <input type="text" id="path-output" placeholder="保存先"
+                onchange="onChangeInput('path-output','save-file-next')" readonly>
+            <button onclick="onClickChoseSaveFolder()" class="btn btn-warning">chose save folder</button>
         </div>
         <div class="footer-button">
             <button id="save-file-back" onclick="onClickShowOnlyShowPathListMenu()"
                 class="btn btn-secondary">back</button>
-            <!-- <button id="save-file-next" onclick="onClickNext()">next</button> -->
+            <button id="save-file-next" onclick="onClickSave()" class="btn btn-primary">next</button>
+        </div>
+    </div>
+    <div id="convert" class="menu">
+        <div class="header">
+            <p>convert</p>
+        </div>
+        <div class="main">
+            <p>convert</p>
+        </div>
+        <div class="footer-button">
+            <!-- <button id="convert-back" onclick="onClickShowOnlySaveFileMenu()" class="btn btn-secondary">back</button> -->
+            <!-- <button id="convert-next" onclick="()" class="btn btn-primary">next</button> -->
         </div>
     </div>
 </body>

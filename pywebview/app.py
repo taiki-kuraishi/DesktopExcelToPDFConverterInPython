@@ -128,20 +128,22 @@ class Api:  # Jsから呼ばれる関数を定義
 
         return path_list
 
+    # 入力されたpathを受け取り、folderに保存する
+    # file not found 1, success 0
     def saveFile(self, folder_path):
         # pathがfolderとして存在するか確認
         status = is_valid_path(folder_path)
         if status != 1:
             return 1
-        # /tmpの中のpdfのpathを取得
-        path_list = get_file_path(TMP_FOLDER_PATH, '.pdf')
-        if len(path_list) == 0:
-            print("pdf file not found")
-            return 2
-        # /tmpの中のpdfをfolder_pathに移動
-        for path in path_list:
-            os.rename(path, folder_path + '/' + path.split('/')[-1])
-            print("move: " + path)
+        # # /tmpの中のpdfのpathを取得
+        # path_list = get_file_path(TMP_FOLDER_PATH, '.pdf')
+        # if len(path_list) == 0:
+        #     print("pdf file not found")
+        #     return 2
+        # # /tmpの中のpdfをfolder_pathに移動
+        # for path in path_list:
+        #     os.rename(path, folder_path + '/' + path.split('/')[-1])
+        #     print("move: " + path)
 
         return 0
 

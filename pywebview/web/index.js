@@ -50,6 +50,7 @@ function onClickShowOnlyStartMenu() {
     document.getElementById('select-path').style.display = 'none';
     document.getElementById('show-path-list').style.display = 'none';
     document.getElementById('save-file').style.display = 'none';
+    document.getElementById('convert').style.display = 'none';
 }
 
 //select-pathのみ表示
@@ -58,9 +59,10 @@ function onClickShowOnlySelectPathMenu() {
     document.getElementById('select-path').style.display = 'block';
     document.getElementById('show-path-list').style.display = 'none';
     document.getElementById('save-file').style.display = 'none';
+    document.getElementById('convert').style.display = 'none';
 
     //select-path-nextにdispatchEvent changeを発火させる
-    input = document.getElementById('path_input');
+    input = document.getElementById('path-input');
     var event = new Event("change");
     input.dispatchEvent(event);
 }
@@ -71,6 +73,7 @@ function onClickShowOnlyShowPathListMenu() {
     document.getElementById('select-path').style.display = 'none';
     document.getElementById('show-path-list').style.display = 'block';
     document.getElementById('save-file').style.display = 'none';
+    document.getElementById('convert').style.display = 'none';
 }
 
 //save-fileのみ表示
@@ -79,21 +82,36 @@ function onClickShowOnlySaveFileMenu() {
     document.getElementById('select-path').style.display = 'none';
     document.getElementById('show-path-list').style.display = 'none';
     document.getElementById('save-file').style.display = 'block';
+    document.getElementById('convert').style.display = 'none';
+
+    //path-outputにdispatchEvent changeを発火させる
+    input = document.getElementById('path-output');
+    var event = new Event("change");
+    input.dispatchEvent(event);
 }
 
-//path_inputには値が入っていたらsubmitボタンを有効化
-function onChangePathInput() {
-    const path = document.getElementById('path_input').value;
+//convertのみ表示
+function onClickShowOnlyConvertMenu() {
+    document.getElementById('start-menu').style.display = 'none';
+    document.getElementById('select-path').style.display = 'none';
+    document.getElementById('show-path-list').style.display = 'none';
+    document.getElementById('save-file').style.display = 'none';
+    document.getElementById('convert').style.display = 'block';
+}
+
+//miIdのinputが空ならtargetIdのbuttonをdisabledにする
+function onChangeInput(myId, targetId) {
+    const path = document.getElementById(myId).value;
     if (path == "") {
-        document.getElementById('select-path-next').disabled = true;
+        document.getElementById(targetId).disabled = true;
     }
     else {
-        document.getElementById('select-path-next').disabled = false;
+        document.getElementById(targetId).disabled = false;
     }
 }
 
 async function onClickPathSubmit() {
-    const paths = document.getElementById('path_input').value;
+    const paths = document.getElementById('path-input').value;
     const path_array = await pywebview.api.submitPath(paths);
     console.log(path_array)
     if (path_array[0] == 1) {
@@ -121,7 +139,7 @@ async function onClickPathSubmit() {
 }
 async function onClickChoseFile() {
     let res = await pywebview.api.showFileDialog();
-    input = document.getElementById('path_input');
+    input = document.getElementById('path-input');
     input.value = res;
 
     // changeイベントを手動でトリガー
@@ -130,7 +148,7 @@ async function onClickChoseFile() {
 }
 async function onClickChoseFolder() {
     let res = await pywebview.api.showFolderDialog();
-    input = document.getElementById('path_input');
+    input = document.getElementById('path-input');
     input.value = res;
 
     // changeイベントを手動でトリガー
@@ -140,21 +158,23 @@ async function onClickChoseFolder() {
 
 async function onClickChoseSaveFolder() {
     let res = await pywebview.api.showFolderDialog();
-    document.getElementById('path_output').value = res;
+    input = document.getElementById('path-output');
+    input.value = res;
+
+    // changeイベントを手動でトリガー
+    var event = new Event("change");
+    input.dispatchEvent(event);
 }
 
 async function onClickSave() {
-    const path = document.getElementById('path_output').value;
+    const path = document.getElementById('path-output').value;
     console.log(path);
     let res = await pywebview.api.saveFile(path);
     console.log(res);
     if (res == 1) {
         alert("Folder not found");
     }
-    else if (res == 2) {
-        alert("PDF File not found");
-    }
     else {
-        alert("Save success");
+        onClickShowOnlyConvertMenu();
     }
 }
