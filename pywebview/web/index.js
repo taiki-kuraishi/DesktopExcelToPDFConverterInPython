@@ -97,6 +97,12 @@ function onClickShowOnlyConvertMenu() {
     document.getElementById('show-path-list').style.display = 'none';
     document.getElementById('save-file').style.display = 'none';
     document.getElementById('convert').style.display = 'block';
+
+    //progressを非表示
+    document.getElementById('progress').style.display = 'none';
+
+    //convert-afterを非表示
+    document.getElementById('convert-after').style.display = 'none';
 }
 
 //miIdのinputが空ならtargetIdのbuttonをdisabledにする
@@ -112,7 +118,7 @@ function onChangeInput(myId, targetId) {
 
 async function onClickPathSubmit() {
     const paths = document.getElementById('path-input').value;
-    const path_array = await pywebview.api.submitPath(paths);
+    path_array = await pywebview.api.submitPath(paths);
     console.log(path_array)
     if (path_array[0] == 1) {
         alert("File not found");
@@ -168,13 +174,88 @@ async function onClickChoseSaveFolder() {
 
 async function onClickSave() {
     const path = document.getElementById('path-output').value;
-    console.log(path);
     let res = await pywebview.api.saveFile(path);
-    console.log(res);
     if (res == 1) {
         alert("Folder not found");
     }
     else {
         onClickShowOnlyConvertMenu();
     }
+}
+
+async function onClickConvert() {
+    //execution-convertをdisabledにする
+    document.getElementById('execution-convert').disabled = true;
+
+    //progressを表示
+    document.getElementById('progress').style.display = 'block';
+
+    //progress-rateのstyleのwidthを0にする
+    document.getElementById('progress-rate').style.width = '0%';
+
+    //path-outputのvalueを取得
+    const destination_folder_path = document.getElementById('path-output').value;
+
+    //path_arrayのpathを一つずつ変換
+    for (let i = 0; i < path_array.length; i++) {
+        console.log(path_array[i])
+        let status = await pywebview.api.checkPath(path_array[i], destination_folder_path);
+        console.log(status)
+        if (status == 0) {
+            //path_array[i]を変換
+            let res = await pywebview.api.convert(path_array[i], destination_folder_path);
+
+            if (res == 0) {
+                //progress-rateのstyleのwidthを変更
+                document.getElementById('progress-rate').style.width = (i + 1) / path_array.length * 100 + '%';
+            }
+            else {
+                alert("変換に失敗しました");
+                return;
+            }
+        }
+        else if (status == 1) {
+            alert("File not found");
+            return;
+        }
+        else if (status == 2) {
+            alert("保存先のフォルダーに同名のファイルが存在します");
+            return;
+        }
+        else {
+            alert("不明なエラー");
+            return;
+        }
+    }
+    //convert後の処理
+    //convert-beforeを非表示
+    document.getElementById('convert-before').style.display = 'none';
+    //convert-afterを表示
+    document.getElementById('convert-after').style.display = 'block';
+
+    //resultにpath-outputのvalueを表示
+    document.getElementById('result').textContent = '保存先 : ' + document.getElementById('path-output').value;
+}
+
+function backToStartMenu(){
+    //start-menuのみ表示
+    onClickShowOnlyStartMenu();
+
+    //path-inputのvalueを空にする
+    document.getElementById('path-input').value = "";
+
+    //path-outputのvalueを空にする
+    document.getElementById('path-output').value = "";
+
+    //path_lengthのtextContentを空にする
+    document.getElementById('path_length').textContent = "";
+
+    //path-list-olの中身を削除
+    const ol = document.getElementById("path-list-ol");
+    while (ol.firstChild) {
+        ol.removeChild(ol.firstChild);
+    }
+
+    //path_arrayを空にする
+    path_array = [];
 }

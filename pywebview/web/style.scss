@@ -19,6 +19,11 @@ body {
             align-items: flex-end;
         }
 
+        #progress {
+            width: 60%;
+            height: auto;
+        }
+
         .main {
             width: 100%;
             height: 60vh;
@@ -41,6 +46,25 @@ body {
                     height: auto;
                     margin: 10px;
                 }
+            }
+
+            #convert-before {
+                width: 100%;
+                height: auto;
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            #convert-after {
+                width: 100%;
+                height: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
             }
 
             input {

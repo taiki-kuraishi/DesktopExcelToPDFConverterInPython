@@ -18,6 +18,10 @@ body .menu .header {
   justify-content: center;
   align-items: flex-end;
 }
+body .menu #progress {
+  width: 60%;
+  height: auto;
+}
 body .menu .main {
   width: 100%;
   height: 60vh;
@@ -39,6 +43,23 @@ body .menu .main #two-button button {
   width: 25%;
   height: auto;
   margin: 10px;
+}
+body .menu .main #convert-before {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+body .menu .main #convert-after {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 body .menu .main input {
   width: 55%;
