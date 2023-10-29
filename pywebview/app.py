@@ -95,7 +95,7 @@ class Api:  # Jsから呼ばれる関数を定義
         return result
 
     # 入力されたpathを受け取り、excelのpathのリストを返す
-    # file not found 1, success 0
+    # file not found 1, success pathのリスト
     def submitPath(self, paths):
         status = 0
         path_list = []

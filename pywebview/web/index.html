@@ -29,18 +29,16 @@
         <div class="main">
             <label for="file_input">chose file dir</label>
             <br>
-            <input type="text" id="path_input" placeholder="your path">
+            <input type="text" id="path_input" placeholder="your path" onchange="onChangePathInput()">
             <div id="two-button">
                 <button class="btn btn-success" onclick="onClickChoseFile()">chose file</button>
                 <button class="btn btn-warning" onclick="onClickChoseFolder()">chose folder</button>
             </div>
-            <br>
-            <button onclick="onClickSubmit()">Submit</button>
         </div>
 
         <div class="footer-button">
             <button id="select-path-back" onclick="onClickShowOnlyStartMenu()" class="btn btn-secondary">back</button>
-            <button id="select-path-next" onclick="onClickShowOnlyShowPathListMenu()"
+            <button id="select-path-next" onclick="onClickPathSubmit()"
                 class="btn btn-primary">next</button>
         </div>
     </div>

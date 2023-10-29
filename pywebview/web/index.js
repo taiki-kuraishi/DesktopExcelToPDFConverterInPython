@@ -1,6 +1,6 @@
 let path_array = [];
 
-function addListItem(full_path,file_name) {
+function addListItem(full_path, file_name) {
     // ul要素を取得
     var ul = document.getElementById("path-list-ol");
 
@@ -29,10 +29,10 @@ function addListItem(full_path,file_name) {
     li.appendChild(div);
 
     // li要素の子要素として、新しいspan要素を追加
-    var span = document.createElement("span");
-    span.setAttribute("class", "badge bg-primary rounded-pill");
-    span.appendChild(document.createTextNode("14"));
-    li.appendChild(span);
+    // var span = document.createElement("span");
+    // span.setAttribute("class", "badge bg-primary rounded-pill");
+    // span.appendChild(document.createTextNode("14"));
+    // li.appendChild(span);
 
     // ul要素の子要素として、新しいli要素を追加
     ul.appendChild(li);
@@ -58,6 +58,11 @@ function onClickShowOnlySelectPathMenu() {
     document.getElementById('select-path').style.display = 'block';
     document.getElementById('show-path-list').style.display = 'none';
     document.getElementById('save-file').style.display = 'none';
+
+    //select-path-nextにdispatchEvent changeを発火させる
+    input = document.getElementById('path_input');
+    var event = new Event("change");
+    input.dispatchEvent(event);
 }
 
 //show-path-listのみ表示
@@ -76,7 +81,18 @@ function onClickShowOnlySaveFileMenu() {
     document.getElementById('save-file').style.display = 'block';
 }
 
-async function onClickSubmit() {
+//path_inputには値が入っていたらsubmitボタンを有効化
+function onChangePathInput() {
+    const path = document.getElementById('path_input').value;
+    if (path == "") {
+        document.getElementById('select-path-next').disabled = true;
+    }
+    else {
+        document.getElementById('select-path-next').disabled = false;
+    }
+}
+
+async function onClickPathSubmit() {
     const paths = document.getElementById('path_input').value;
     const path_array = await pywebview.api.submitPath(paths);
     console.log(path_array)
@@ -84,24 +100,42 @@ async function onClickSubmit() {
         alert("File not found");
     }
     else {
-        console.log(path_array);
+        //show-path-listのみ表示
+        onClickShowOnlyShowPathListMenu();
+
         //pathの個数を表示
         const p = document.getElementById("path_length");
         p.textContent = "fileの個数は : " + path_array.length;
 
+        //ol path-list-olの中身を削除
+        const ol = document.getElementById("path-list-ol");
+        while (ol.firstChild) {
+            ol.removeChild(ol.firstChild);
+        }
+
         // pathをリストで表示
         for (let i = 0; i < path_array.length; i++) {
-            addListItem(path_array[i],path_array[i].split('/').pop())
+            addListItem(path_array[i], path_array[i].split('/').pop())
         }
     }
 }
 async function onClickChoseFile() {
     let res = await pywebview.api.showFileDialog();
-    document.getElementById('path_input').value = res;
+    input = document.getElementById('path_input');
+    input.value = res;
+
+    // changeイベントを手動でトリガー
+    var event = new Event("change");
+    input.dispatchEvent(event);
 }
 async function onClickChoseFolder() {
     let res = await pywebview.api.showFolderDialog();
-    document.getElementById('path_input').value = res;
+    input = document.getElementById('path_input');
+    input.value = res;
+
+    // changeイベントを手動でトリガー
+    var event = new Event("change");
+    input.dispatchEvent(event);
 }
 
 async function onClickChoseSaveFolder() {
