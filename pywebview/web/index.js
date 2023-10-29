@@ -202,28 +202,32 @@ async function onClickConvert() {
         let status = await pywebview.api.checkPath(path_array[i], destination_folder_path);
         console.log(status)
         if (status == 0) {
-            //path_array[i]を変換
-            let res = await pywebview.api.convert(path_array[i], destination_folder_path);
-
-            if (res == 0) {
-                //progress-rateのstyleのwidthを変更
-                document.getElementById('progress-rate').style.width = (i + 1) / path_array.length * 100 + '%';
-            }
-            else {
-                alert("変換に失敗しました");
-                return;
-            }
+            //do nothing
         }
         else if (status == 1) {
             alert("File not found");
             return;
         }
         else if (status == 2) {
-            alert("保存先のフォルダーに同名のファイルが存在します");
-            return;
+            var confirm = window.confirm('保存先に同名のファイルが存在します。上書きしますか？');
+            if (confirm != true) {
+                return;
+            }
         }
         else {
             alert("不明なエラー");
+            return;
+        }
+        //変換
+        //path_array[i]を変換
+        let res = await pywebview.api.convert(path_array[i], destination_folder_path);
+
+        if (res == 0) {
+            //progress-rateのstyleのwidthを変更
+            document.getElementById('progress-rate').style.width = (i + 1) / path_array.length * 100 + '%';
+        }
+        else {
+            alert("変換に失敗しました");
             return;
         }
     }
@@ -237,7 +241,7 @@ async function onClickConvert() {
     document.getElementById('result').textContent = '保存先 : ' + document.getElementById('path-output').value;
 }
 
-function backToStartMenu(){
+function backToStartMenu() {
     //start-menuのみ表示
     onClickShowOnlyStartMenu();
 
