@@ -1,1 +1,12 @@
-c
+appscript==1.2.2
+bottle==0.12.25
+lxml==4.9.3
+proxy-tools==0.1.0
+psutil==5.9.6
+pyobjc-core==10.0
+pyobjc-framework-Cocoa==10.0
+pyobjc-framework-Security==10.0
+pyobjc-framework-WebKit==10.0
+pywebview==4.4
+typing_extensions==4.8.0
+xlwings==0.30.12
