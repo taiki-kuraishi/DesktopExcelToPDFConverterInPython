@@ -98,11 +98,17 @@ function onClickShowOnlyConvertMenu() {
     document.getElementById('save-file').style.display = 'none';
     document.getElementById('convert').style.display = 'block';
 
-    //progressを非表示
-    document.getElementById('progress').style.display = 'none';
+    //convert-beforeを表示
+    document.getElementById('convert-before').style.display = 'block';
 
     //convert-afterを非表示
     document.getElementById('convert-after').style.display = 'none';
+
+    //progressを非表示
+    document.getElementById('progress').style.display = 'none';
+
+    //execution-convertをdisabledにする
+    document.getElementById('execution-convert').disabled = false;
 }
 
 //miIdのinputが空ならtargetIdのbuttonをdisabledにする
@@ -129,7 +135,7 @@ async function onClickPathSubmit() {
 
         //pathの個数を表示
         const p = document.getElementById("path_length");
-        p.textContent = "fileの個数は : " + path_array.length;
+        p.textContent = "The number of files is : " + path_array.length;
 
         //ol path-list-olの中身を削除
         const ol = document.getElementById("path-list-ol");
@@ -209,13 +215,13 @@ async function onClickConvert() {
             return;
         }
         else if (status == 2) {
-            var confirm = window.confirm('保存先に同名のファイルが存在します。上書きしますか？');
+            var confirm = window.confirm("A file with the same name exists in the save destination.\n Do you want to overwrite?");
             if (confirm != true) {
                 return;
             }
         }
         else {
-            alert("不明なエラー");
+            alert("Unknown error");
             return;
         }
         //変換
@@ -227,7 +233,7 @@ async function onClickConvert() {
             document.getElementById('progress-rate').style.width = (i + 1) / path_array.length * 100 + '%';
         }
         else {
-            alert("変換に失敗しました");
+            alert("conversion failed");
             return;
         }
     }
@@ -238,7 +244,7 @@ async function onClickConvert() {
     document.getElementById('convert-after').style.display = 'block';
 
     //resultにpath-outputのvalueを表示
-    document.getElementById('result').textContent = '保存先 : ' + document.getElementById('path-output').value;
+    document.getElementById('result').textContent = 'Destination : ' + document.getElementById('path-output').value;
 }
 
 function backToStartMenu() {
