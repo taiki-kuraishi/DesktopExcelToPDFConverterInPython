@@ -5,7 +5,7 @@ python -m venv venv
 
 activate venv
 ```
-source myenv/bin/activate
+source venv/bin/activate
 ```
 
 install package
@@ -16,4 +16,9 @@ pip install -r requirements.txt
 deactivate
 ```
 deactivate
+```
+
+requirements.txt
+```
+pip3 freeze > requirements.txt
 ```
