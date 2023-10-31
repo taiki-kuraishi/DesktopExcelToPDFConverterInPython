@@ -14,9 +14,10 @@
 <body>
     <div id="start-menu" class="menu">
         <div class="header">
-            <p>this is start-menu</p>
+            <p>start menu</p>
         </div>
         <div class="main">
+            <h1>Excel to PDF Converter</h1>
         </div>
         <div class="footer-button">
             <button id="start-menu-next" onclick="onClickShowOnlySelectPathMenu()" class="btn btn-primary">next</button>
@@ -24,16 +25,16 @@
     </div>
     <div id="select-path" class="menu">
         <div class="header">
-            <p>select path</p>
+            <p>select path menu</p>
         </div>
         <div class="main">
-            <label for="file_input">chose file dir</label>
+            <label for="file_input">Please select a folder or file path</label>
             <br>
             <input type="text" id="path-input" placeholder="your path"
                 onchange="onChangeInput('path-input' , 'select-path-next')">
             <div id="two-button">
-                <button class="btn btn-success" onclick="onClickChoseFile()">chose file</button>
-                <button class="btn btn-warning" onclick="onClickChoseFolder()">chose folder</button>
+                <button class="btn btn-success" onclick="onClickChoseFile()">Select Excel file</button>
+                <button class="btn btn-warning" onclick="onClickChoseFolder()">Select folder</button>
             </div>
         </div>
 
@@ -70,10 +71,10 @@
             <p>save file</p>
         </div>
         <div class="main">
-            <p>save folder</p>
-            <input type="text" id="path-output" placeholder="保存先"
+            <p>Please choose a folder path to save to.</p>
+            <input type="text" id="path-output" placeholder="save destination"
                 onchange="onChangeInput('path-output','save-file-next')" readonly>
-            <button onclick="onClickChoseSaveFolder()" class="btn btn-warning">chose save folder</button>
+            <button onclick="onClickChoseSaveFolder()" class="btn btn-warning">Select folder </button>
         </div>
         <div class="footer-button">
             <button id="save-file-back" onclick="onClickShowOnlyShowPathListMenu()"
@@ -89,17 +90,17 @@
             <div id="convert-before">
                 <p>convert</p>
                 <div id="progress">
-                    <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75"
+                    <div id="progressbar" class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75"
                         aria-valuemin="0" aria-valuemax="100">
                         <div id="progress-rate" class="progress-bar progress-bar-striped progress-bar-animated"></div>
                     </div>
                 </div>
-                <button id="execution-convert" onclick="onClickConvert()" class="btn btn-primary">変換実行</button>
+                <button id="execution-convert" onclick="onClickConvert()" class="btn btn-primary">Execute conversion</button>
             </div>
             <div id="convert-after">
-                <h1>変換完了</h1>
+                <h1>Conversion complete</h1>
                 <p id="result"></p>
-                <button id="back-to-start-menu" onclick="backToStartMenu()" class="btn btn-primary">スタートメニューに戻る</button>
+                <button id="back-to-start-menu" onclick="backToStartMenu()" class="btn btn-primary">back to start menu</button>
             </div>
         </div>
         <div class="footer-button">

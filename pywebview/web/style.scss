@@ -19,11 +19,6 @@ body {
             align-items: flex-end;
         }
 
-        #progress {
-            width: 60%;
-            height: auto;
-        }
-
         .main {
             width: 100%;
             height: 60vh;
@@ -56,6 +51,16 @@ body {
                 justify-content: center;
                 align-items: center;
                 text-align: center;
+
+                #progress {
+                    width: 60%;
+                    margin: 0 auto;
+                    // #progressbar{
+                    //     width: 60%;
+                    //     height: auto;
+                    //     margin: 0 auto;
+                    // }
+                }
             }
 
             #convert-after {
@@ -75,16 +80,27 @@ body {
             button {
                 width: 25%;
                 height: auto;
+                margin: 10px;
             }
 
             ol {
-                width: 60%;
+                width: 70%;
                 height: 50vh;
                 overflow-y: scroll;
 
                 li {
                     width: 100%;
                     text-align: left;
+
+                    #full-path {
+                        // 文字を小さくする
+                        font-size: 0.8em;
+
+                        #file-name {
+                            // 文字を大きくする
+                            font-size: 1.4em;
+                        }
+                    }
                 }
             }
         }
@@ -97,9 +113,10 @@ body {
 
             button {
                 width: 25%;
-                height: 25%;
+                height: auto;
                 margin: 10px;
             }
         }
+
     }
 }

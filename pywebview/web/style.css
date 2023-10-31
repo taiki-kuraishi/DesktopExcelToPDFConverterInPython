@@ -18,10 +18,6 @@ body .menu .header {
   justify-content: center;
   align-items: flex-end;
 }
-body .menu #progress {
-  width: 60%;
-  height: auto;
-}
 body .menu .main {
   width: 100%;
   height: 60vh;
@@ -53,6 +49,10 @@ body .menu .main #convert-before {
   align-items: center;
   text-align: center;
 }
+body .menu .main #convert-before #progress {
+  width: 60%;
+  margin: 0 auto;
+}
 body .menu .main #convert-after {
   width: 100%;
   height: auto;
@@ -68,15 +68,22 @@ body .menu .main input {
 body .menu .main button {
   width: 25%;
   height: auto;
+  margin: 10px;
 }
 body .menu .main ol {
-  width: 60%;
+  width: 70%;
   height: 50vh;
   overflow-y: scroll;
 }
 body .menu .main ol li {
   width: 100%;
   text-align: left;
+}
+body .menu .main ol li #full-path {
+  font-size: 0.8em;
+}
+body .menu .main ol li #full-path #file-name {
+  font-size: 1.4em;
 }
 body .menu .footer-button {
   width: 100%;
@@ -86,6 +93,6 @@ body .menu .footer-button {
 }
 body .menu .footer-button button {
   width: 25%;
-  height: 25%;
+  height: auto;
   margin: 10px;
 }/*# sourceMappingURL=style.css.map */
