@@ -59,4 +59,4 @@ bootstrap 5.3.0
 
 ## Licence
 - - -
-DesktopExcelToPDFConverter is licensed under the MIT License.
+DesktopExcelToPDFConverter is licensed under [the MIT License](https://github.com/taiki-kuraishi/DesktopExcelToPDFConverterInPython/blob/main/LICENSE.txt).
